@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeonSo | Bio</title>
 
-<!-- Font -->
+<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <!-- FontAwesome -->
@@ -27,10 +27,10 @@ body{
     align-items:center;
     overflow:hidden;
     color:white;
-    transition:0.5s;
+    transition:0.4s;
 }
 
-/* Animated Gradient */
+/* ===== Animated Gradient Background ===== */
 body::before{
     content:"";
     position:absolute;
@@ -38,7 +38,7 @@ body::before{
     height:400%;
     background:linear-gradient(-45deg,#141e30,#243b55,#0f2027,#2c5364);
     background-size:400% 400%;
-    animation:gradientMove 12s ease infinite;
+    animation:gradientMove 15s ease infinite;
     z-index:-2;
 }
 
@@ -48,13 +48,13 @@ body::before{
     100%{background-position:0% 50%;}
 }
 
-/* Particles Canvas */
+/* ===== Particle Canvas ===== */
 canvas{
     position:absolute;
     z-index:-1;
 }
 
-/* Card */
+/* ===== Card ===== */
 .card{
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(15px);
@@ -63,14 +63,14 @@ canvas{
     width:380px;
     text-align:center;
     box-shadow:0 0 40px rgba(0,0,0,0.6);
-    transition:0.4s;
+    transition:0.3s;
 }
 
 .card:hover{
     transform:translateY(-5px);
 }
 
-/* Avatar */
+/* ===== Avatar ===== */
 .card img{
     width:130px;
     border-radius:50%;
@@ -78,28 +78,21 @@ canvas{
     border:3px solid rgba(255,255,255,0.4);
 }
 
-/* Typing */
-.typing{
-    font-size:24px;
+/* ===== Name Typing ===== */
+#typing{
+    font-size:26px;
     font-weight:600;
-    border-right:3px solid white;
-    width:fit-content;
-    margin:auto;
-    white-space:nowrap;
-    overflow:hidden;
-    animation:typing 3s steps(20,end), blink 0.7s infinite;
+    margin-bottom:5px;
 }
 
-@keyframes typing{
-    from{width:0;}
-    to{width:100%;}
+/* ===== Description ===== */
+p{
+    font-size:14px;
+    opacity:0.85;
+    margin-bottom:20px;
 }
 
-@keyframes blink{
-    50%{border-color:transparent;}
-}
-
-/* Links */
+/* ===== Social Links ===== */
 a{
     display:block;
     padding:12px;
@@ -121,7 +114,7 @@ a:hover{
     box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
 
-/* Dark mode toggle */
+/* ===== Toggle Button ===== */
 .toggle{
     position:absolute;
     top:20px;
@@ -130,13 +123,13 @@ a:hover{
     font-size:20px;
 }
 
-/* Light mode */
+/* ===== Light Mode ===== */
 .light{
     color:#222;
 }
 
 .light .card{
-    background:rgba(255,255,255,0.7);
+    background:rgba(255,255,255,0.8);
 }
 
 .light a{
@@ -157,7 +150,7 @@ a:hover{
 
 <div class="card">
     <img src="https://via.placeholder.com/130">
-    <div class="typing">LeonSo</div>
+    <div id="typing"></div>
     <p>IT Student | Java | Arduino | WinForms</p>
 
     <a href="https://www.facebook.com/duyluve5.vvd" target="_blank">
@@ -175,12 +168,27 @@ a:hover{
 
 <script>
 
-/* Dark mode toggle */
+/* ===== Dark Mode Toggle ===== */
 function toggleMode(){
     document.body.classList.toggle("light");
 }
 
-/* Simple hacker particles */
+/* ===== Typing Effect (real letter by letter) ===== */
+const text = "LeonSo";
+const typingElement = document.getElementById("typing");
+let index = 0;
+
+function typeEffect() {
+    if (index < text.length) {
+        typingElement.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 150);
+    }
+}
+
+typeEffect();
+
+/* ===== Hacker Particle Background ===== */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -189,7 +197,7 @@ canvas.height = window.innerHeight;
 
 let particlesArray = [];
 
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
     particlesArray.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
