@@ -26,13 +26,13 @@ body{
     transition:0.4s;
 }
 
-/* ===== Animated Gradient Background ===== */
+/* ===== Animated Background ===== */
 body::before{
     content:"";
     position:absolute;
     width:400%;
     height:400%;
-    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#00ffcc);
+    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
     background-size:400% 400%;
     animation:gradientMove 15s ease infinite;
     z-index:-3;
@@ -44,12 +44,6 @@ body::before{
     100%{background-position:0% 50%;}
 }
 
-/* ===== Particle Canvas ===== */
-canvas{
-    position:absolute;
-    z-index:-2;
-}
-
 /* ===== Loader ===== */
 #loader{
     position:fixed;
@@ -59,35 +53,32 @@ canvas{
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
     z-index:9999;
     transition:1s ease;
 }
 
-.logo-animate{
-    font-size:55px;
-    font-weight:700;
-    letter-spacing:6px;
-    background:linear-gradient(90deg,#00ffcc,#00ffff,#00ffcc,#00ffff);
-    background-size:300%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:gradientRun 2s linear infinite;
-    text-shadow:
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 20px #00ffcc,
-        0 0 40px #00ffcc;
+.loader-text{
+    font-size:42px;
+    font-weight:600;
+    letter-spacing:8px;
+    color:white;
+    opacity:0;
+    animation:fadeIn 1.5s ease forwards;
 }
 
-@keyframes gradientRun{
-    0%{background-position:0%}
-    100%{background-position:300%}
+@keyframes fadeIn{
+    to{opacity:1;}
 }
 
 .hide-loader{
     opacity:0;
     visibility:hidden;
+}
+
+/* ===== Particle ===== */
+canvas{
+    position:absolute;
+    z-index:-2;
 }
 
 /* ===== Card ===== */
@@ -171,9 +162,9 @@ a:hover{
 
 <body>
 
-<!-- ===== Intro Loader ===== -->
+<!-- ===== Simple Intro ===== -->
 <div id="loader">
-    <h1 class="logo-animate">LEON SO</h1>
+    <div class="loader-text">LEON SO</div>
 </div>
 
 <!-- ===== Intro Music ===== -->
@@ -211,7 +202,7 @@ a:hover{
 window.addEventListener("load", function(){
     setTimeout(()=>{
         document.getElementById("loader").classList.add("hide-loader");
-    },2500);
+    },2000);
 });
 
 /* ===== Dark Mode ===== */
@@ -234,7 +225,7 @@ function typeEffect() {
 
 typeEffect();
 
-/* ===== Hacker Particle ===== */
+/* ===== Particle Background ===== */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -243,18 +234,18 @@ canvas.height = window.innerHeight;
 
 let particlesArray = [];
 
-for(let i=0;i<100;i++){
+for(let i=0;i<80;i++){
     particlesArray.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
         size:Math.random()*2,
-        speedY:Math.random()*1+0.5
+        speedY:Math.random()*1+0.3
     });
 }
 
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="rgba(0,255,150,0.7)";
+    ctx.fillStyle="rgba(0,255,150,0.6)";
     particlesArray.forEach(p=>{
         ctx.fillRect(p.x,p.y,p.size,p.size);
         p.y+=p.speedY;
