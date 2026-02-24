@@ -5,14 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeonSo | Bio</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<!-- FontAwesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -36,10 +32,10 @@ body::before{
     position:absolute;
     width:400%;
     height:400%;
-    background:linear-gradient(-45deg,#141e30,#243b55,#0f2027,#2c5364);
+    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#00ffcc);
     background-size:400% 400%;
     animation:gradientMove 15s ease infinite;
-    z-index:-2;
+    z-index:-3;
 }
 
 @keyframes gradientMove{
@@ -51,7 +47,47 @@ body::before{
 /* ===== Particle Canvas ===== */
 canvas{
     position:absolute;
-    z-index:-1;
+    z-index:-2;
+}
+
+/* ===== Loader ===== */
+#loader{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+    transition:1s ease;
+}
+
+.logo-animate{
+    font-size:55px;
+    font-weight:700;
+    letter-spacing:6px;
+    background:linear-gradient(90deg,#00ffcc,#00ffff,#00ffcc,#00ffff);
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:gradientRun 2s linear infinite;
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffcc,
+        0 0 40px #00ffcc;
+}
+
+@keyframes gradientRun{
+    0%{background-position:0%}
+    100%{background-position:300%}
+}
+
+.hide-loader{
+    opacity:0;
+    visibility:hidden;
 }
 
 /* ===== Card ===== */
@@ -70,7 +106,6 @@ canvas{
     transform:translateY(-5px);
 }
 
-/* ===== Avatar ===== */
 .card img{
     width:130px;
     border-radius:50%;
@@ -78,21 +113,18 @@ canvas{
     border:3px solid rgba(255,255,255,0.4);
 }
 
-/* ===== Name Typing ===== */
 #typing{
-    font-size:26px;
+    font-size:24px;
     font-weight:600;
-    margin-bottom:5px;
+    margin-bottom:8px;
 }
 
-/* ===== Description ===== */
 p{
     font-size:14px;
     opacity:0.85;
     margin-bottom:20px;
 }
 
-/* ===== Social Links ===== */
 a{
     display:block;
     padding:12px;
@@ -114,7 +146,6 @@ a:hover{
     box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
 
-/* ===== Toggle Button ===== */
 .toggle{
     position:absolute;
     top:20px;
@@ -123,24 +154,32 @@ a:hover{
     font-size:20px;
 }
 
-/* ===== Light Mode ===== */
 .light{
     color:#222;
 }
 
 .light .card{
-    background:rgba(255,255,255,0.8);
+    background:rgba(255,255,255,0.85);
 }
 
 .light a{
     background:#243b55;
     color:white;
 }
-
 </style>
 </head>
 
 <body>
+
+<!-- ===== Intro Loader ===== -->
+<div id="loader">
+    <h1 class="logo-animate">LEON SO</h1>
+</div>
+
+<!-- ===== Intro Music ===== -->
+<audio id="introMusic" autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6e2a6e5f09.mp3?filename=ambient-piano-110624.mp3" type="audio/mp3">
+</audio>
 
 <div class="toggle" onclick="toggleMode()">
     <i class="fa-solid fa-moon"></i>
@@ -168,12 +207,19 @@ a:hover{
 
 <script>
 
-/* ===== Dark Mode Toggle ===== */
+/* ===== Loader Hide ===== */
+window.addEventListener("load", function(){
+    setTimeout(()=>{
+        document.getElementById("loader").classList.add("hide-loader");
+    },2500);
+});
+
+/* ===== Dark Mode ===== */
 function toggleMode(){
     document.body.classList.toggle("light");
 }
 
-/* ===== Typing Effect (real letter by letter) ===== */
+/* ===== Typing Effect ===== */
 const text = "LeonSo";
 const typingElement = document.getElementById("typing");
 let index = 0;
@@ -188,7 +234,7 @@ function typeEffect() {
 
 typeEffect();
 
-/* ===== Hacker Particle Background ===== */
+/* ===== Hacker Particle ===== */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -208,7 +254,7 @@ for(let i=0;i<100;i++){
 
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="rgba(0,255,0,0.7)";
+    ctx.fillStyle="rgba(0,255,150,0.7)";
     particlesArray.forEach(p=>{
         ctx.fillRect(p.x,p.y,p.size,p.size);
         p.y+=p.speedY;
