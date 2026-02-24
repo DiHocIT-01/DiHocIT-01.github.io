@@ -2,51 +2,113 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>LeonSo Bio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeonSo | Bio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
 body{
-    font-family: Arial;
-    background: linear-gradient(to right,#141e30,#243b55);
-    text-align:center;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#141e30,#243b55);
     color:white;
-    padding:50px;
+    animation:fadeIn 1.5s ease-in-out;
 }
+
+/* Fade animation */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* Card */
 .card{
-    background:rgba(255,255,255,0.1);
-    padding:30px;
-    border-radius:15px;
-    width:350px;
-    margin:auto;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    padding:40px;
+    border-radius:20px;
+    width:380px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+    transition:0.4s;
 }
-img{
-    width:120px;
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 40px rgba(0,0,0,0.7);
+}
+
+/* Avatar */
+.card img{
+    width:130px;
     border-radius:50%;
+    margin-bottom:15px;
+    animation:float 3s ease-in-out infinite;
+    border:3px solid rgba(255,255,255,0.4);
 }
+
+/* Floating avatar */
+@keyframes float{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0px);}
+}
+
+h2{
+    font-weight:600;
+    margin-bottom:5px;
+}
+
+p{
+    font-size:14px;
+    opacity:0.8;
+    margin-bottom:20px;
+}
+
+/* Links */
 a{
     display:block;
+    padding:12px;
+    margin:10px 0;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
     background:white;
     color:#243b55;
-    padding:10px;
-    margin:10px 0;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
+    transition:0.3s;
 }
+
 a:hover{
-    background:#ddd;
+    transform:scale(1.05);
+    background:#f1f1f1;
+    box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
+
 </style>
 </head>
 
 <body>
+
 <div class="card">
-    <img src="https://via.placeholder.com/120">
+    <img src="https://via.placeholder.com/130">
     <h2>LeonSo</h2>
     <p>IT Student | Java | Arduino | WinForms</p>
 
-    <a href="https://www.facebook.com/duyluve5.vvd">Facebook</a>
-    <a href="https://www.tiktok.com/@duyluve5.vvd">TikTok</a>
-    <a href="https://github.com/DiHocIT-01">GitHub</a>
+    <a href="https://www.facebook.com/duyluve5.vvd" target="_blank">Facebook</a>
+    <a href="https://www.tiktok.com/@duyluve5.vvd" target="_blank">TikTok</a>
+    <a href="https://github.com/DiHocIT-01" target="_blank">GitHub</a>
 </div>
+
 </body>
 </html>
