@@ -26,7 +26,7 @@ body{
     transition:0.4s;
 }
 
-/* ===== Gradient Background ===== */
+/* Gradient Background */
 body::before{
     content:"";
     position:absolute;
@@ -44,13 +44,12 @@ body::before{
     100%{background-position:0% 50%;}
 }
 
-/* ===== Particle ===== */
 canvas{
     position:absolute;
     z-index:-2;
 }
 
-/* ===== Card ===== */
+/* Card */
 .card{
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(15px);
@@ -106,15 +105,23 @@ a:hover{
     box-shadow:0 0 15px rgba(255,255,255,0.6);
 }
 
-.toggle{
+/* Toggle Buttons */
+.toggle, .music-btn{
     position:absolute;
     top:20px;
-    right:20px;
     cursor:pointer;
     font-size:20px;
 }
 
-/* ===== Light Mode ===== */
+.toggle{
+    right:20px;
+}
+
+.music-btn{
+    right:60px;
+}
+
+/* Light Mode */
 .light{
     color:#222;
 }
@@ -131,6 +138,15 @@ a:hover{
 </head>
 
 <body>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6e2a6e5f09.mp3?filename=ambient-piano-110624.mp3" type="audio/mp3">
+</audio>
+
+<div class="music-btn" onclick="toggleMusic()">
+    <i id="musicIcon" class="fa-solid fa-volume-xmark"></i>
+</div>
 
 <div class="toggle" onclick="toggleMode()">
     <i class="fa-solid fa-moon"></i>
@@ -158,12 +174,12 @@ a:hover{
 
 <script>
 
-/* ===== Dark Mode ===== */
+/* Dark Mode */
 function toggleMode(){
     document.body.classList.toggle("light");
 }
 
-/* ===== Typing Effect ===== */
+/* Typing */
 const text = "LeonSo";
 const typingElement = document.getElementById("typing");
 let index = 0;
@@ -175,18 +191,32 @@ function typeEffect() {
         setTimeout(typeEffect, 150);
     }
 }
-
 typeEffect();
 
-/* ===== Particle Background ===== */
+/* Music Control */
+const music = document.getElementById("bgMusic");
+const musicIcon = document.getElementById("musicIcon");
+music.volume = 0.3;
+
+function toggleMusic(){
+    if(music.paused){
+        music.play();
+        musicIcon.classList.remove("fa-volume-xmark");
+        musicIcon.classList.add("fa-volume-high");
+    } else {
+        music.pause();
+        musicIcon.classList.remove("fa-volume-high");
+        musicIcon.classList.add("fa-volume-xmark");
+    }
+}
+
+/* Particle */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray = [];
-
 for(let i=0;i<100;i++){
     particlesArray.push({
         x:Math.random()*canvas.width,
@@ -209,7 +239,6 @@ function animate(){
     });
     requestAnimationFrame(animate);
 }
-
 animate();
 
 </script>
